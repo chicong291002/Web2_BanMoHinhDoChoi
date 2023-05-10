@@ -1,0 +1,86 @@
+.form_thongke {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 30px;
+  font-weight: bold;
+  color: #f44336;
+  text-align: center;
+}
+
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+/* Style cho nút Submit */
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Style cho nút Reset */
+button[type="reset"] {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-top_container {
+  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  align-items: center;
+}
+
+.product_top {
+  color: blue;
+}
+.product_top,
+.product_top_name {
+  text-align: center;
+  align-items: center;
+}
+
+img {
+  margin-left: 10px;
+}
+
+.product_top_image {
+  display: flex;
+  justify-content: center;
+}
