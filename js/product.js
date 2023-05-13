@@ -108,7 +108,7 @@ function handlePageNumber(loaisp,start){
     if(start == 1){
         start = 0;
     }else{
-        start = (start-1);
+        start = (start-1)*3;
     }
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "./DAL/DAL_Product_List.php", true);
@@ -124,6 +124,7 @@ function handlePageNumber(loaisp,start){
             });
         }
     };
+    console.error("tenloaisp="+loaisp+"&start="+start);
     xhr.send("tenloaisp="+loaisp+"&start="+start);
 }
 function nextRenderPageNumber(loaisp,end_p){
@@ -144,7 +145,7 @@ function backRenderPageNumber(loaisp,start_p){
     }
     const pagenumber = document.querySelector(".pagenumber");
     start_page = start_p
-    end_page = start_p +2;
+    end_page = start_p + 2;
     createPhanTrang(loaisp,start_page,end_page, function(htmls){
         var phantrang = htmls;
         pagenumber.innerHTML = phantrang;   

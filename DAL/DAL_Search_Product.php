@@ -8,6 +8,7 @@ function getSearchAll(){
     $idcaterogy = $_POST['caterogy'];
     $to_gia = $_POST['to'];
     $from_gia = $_POST['from'];
+    $start = $_POST['start'];
     $path = "./DAL/Image_SanPham/";
     include("./DAL_Connect.php");
     $sql = "SELECT * FROM product sp
@@ -31,13 +32,13 @@ function getSearchAll(){
         $sql .= "(SELECT MAX(price) FROM product) ";
     }
     $sql .= " ORDER BY Price ".$kieugia;
+    $sql .= " LIMIT ".$start.",6";
     $result = $conn->query($sql);
-    $soluongsp = $result->num_rows;
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
                 $srcImg = $path . $row['Image'];
-                echo "<div class=\"container__row-card\" onclick=\"showItemDetail('" . $row['NameProduct'] . "', " . $row['Amount'] . ",'" . $row['CharacterName'] . "', '" . $row['AnimeOrMangaOrGameFPS'] . "', '" . $row['Height'] . "', '" . $row['Weight'] . "', '" . $row['Material'] . "', '" . $row['ProductDetail'] . "', '" . $srcImg . "', " . $row['Price'] . ", '" . $row['ProductID'] . "')\">";
+                echo "<div class=\"container__row-card\" onclick=\"showItemDetail('" . $row['NameProduct'] . "', " . $row['Amount'] . ",'" . $row['Height'] . "', '" . $row['Weight'] . "', '" . $row['Material'] . "', '" . $row['ProductDetail'] . "', '" . $srcImg . "', " . $row['Price'] . ", '" . $row['ProductID'] . "')\">";
                 echo "<div class=\"product__price--percent\">";
                 echo "<p>10%";
                 echo "<p>";
@@ -71,6 +72,7 @@ function phantrang(){
     $from_gia = $_POST['from'];
     $start = $_POST['start'];
     $end = $_POST['end'];
+    $check = false;
     include("./DAL_Connect.php");
     $sql = "SELECT * FROM product sp
     JOIN caterogyproduct loaisp ON sp.IDCaterogyProduct = loaisp.IDCaterogyProduct
@@ -95,40 +97,42 @@ function phantrang(){
     $sql .= " ORDER BY Price ".$kieugia;
     $result = $conn->query($sql);
     $soluongsp = $result->num_rows;
-    $sotrang = ceil($soluongsp/3);
-    
+    $sotrang = ceil($soluongsp/8);
     if ($sotrang > 3){
-        echo '<li class="pagenumber_item" onclick="backRenderPageNumber(\''.$tenloaisp.'\','.$start.')">';
-        echo '<a class="pagenumber_item_link fa fa-angle-left"></a></li>';
+        echo '<li class="pagenumber_search_item" onclick="luiRenderPageNumber('.$start.')">';
+        echo '<a class="pagenumber_search_item_link fa fa-angle-left"></a></li>';
     if($end > $sotrang){
         $temp_end = $end;
         $end = $sotrang;
         $check = true;
     }
     for ($i = $start; $i <= $end; $i++){
-        echo '<li class="pagenumber_item" onclick="handlePageNumber(\''.$tenloaisp.'\','.$i.')">';
-        echo '<a class="pagenumber_item_link">'.$i.'</a></li>';
+        echo '<li class="pagenumber_search_item" onclick="chonPageNumber('.$i.')">';
+        echo '<a class="pagenumber_search_item_link">'.$i.'</a></li>';
     }
     if ($check == true){
-        echo '<li class="pagenumber_item" onclick="nextRenderPageNumber(\''.$tenloaisp.'\','.($start-1).')">';
-        echo '<a class="pagenumber_item_link fa fa-angle-right" id="angle_right"></a></li>';
+        echo '<li class="pagenumber_search_item" onclick="tienRenderPageNumber('.($start-1).')">';
+        echo '<a class="pagenumber_search_item_link fa fa-angle-right" id="angle_right"></a></li>';
     }
     else{
-        echo '<li class="pagenumber_item" onclick="nextRenderPageNumber(\''.$tenloaisp.'\','.$end.')">';
-        echo '<a class="pagenumber_item_link fa fa-angle-right" id="angle_right"></a></li>';
+        echo '<li class="pagenumber_search_item" onclick="tienRenderPageNumber('.$end.')">';
+        echo '<a class="pagenumber_search_item_link fa fa-angle-right" id="angle_right"></a></li>';
     }
     }else {
         for ($i = 1; $i <= $sotrang; $i++){
-        echo '<li class="pagenumber_item" onclick="handlePageNumber(\''.$tenloaisp.'\','.$i.')">';
-        echo '<a class="pagenumber_item_link">'.$i.'</a></li>';
+        echo '<li class="pagenumber_search_item" onclick="chonPageNumber('.(($i-1)*8+1).')">';
+        echo '<a class="pagenumber_search_item_link">'.$i.'</a></li>';
         }
     }
     $conn->close();
 
 }
+
 if($loai == "getsearch"){
     getSearchAll();
 }
-
+if($loai == "phantrang"){
+    phantrang();
+}
 
 ?>

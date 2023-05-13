@@ -3,7 +3,6 @@ session_start();
 
 if(isset($_POST['ProductID'])) {
     $productid = $_POST['ProductID'];
-    
 }
 
 if(isset($_POST['SoLuong'])) {
@@ -19,10 +18,27 @@ if(isset($_POST['PhuongThuc'])) {
 
 function add($productid, $soluong)
 {
-    $check = checkAmountproduct($productid,$soluong);
-    if ($check == 0){
-        $_SESSION['Cart'][$productid] = $soluong;
 
+    $check = checkAmountproduct($productid,$soluong);
+    $check_exist = 0;
+    if ($check == 0){
+        foreach ($_SESSION['Cart'] as $key => $value) {
+            if($key == $productid){
+                $check = checkAmountproduct($productid,($soluong+$value));
+                if ($check == 0){
+                $_SESSION['Cart'][$key] = ($value + $soluong);
+                $check_exist = 1;
+                }
+                else{
+                    $check_exist = 1;
+                    echo 1;
+                }
+            }
+            
+        }
+        if($check_exist == 0){
+            $_SESSION['Cart'][$productid] = $soluong;
+        }
     }
     else {
         echo 1;
@@ -72,7 +88,7 @@ function show()
                     echo 'alt="remove-icon"';
                     echo '/>';
                     echo '</button>';
-                    echo "<input type=\"text\" class=\"cart__input\" value=\"$value\"/>";
+                    echo "<input type=\"number\" class=\"cart__input\" value=\"$value\"/>";
                     echo '<button class="cart__btn-up">';
                     echo '<img ';
                     echo 'src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-add.svg"';
@@ -84,8 +100,8 @@ function show()
                     echo "<div class=\"cart__item__price\">" . $formatted_price . " đ" . "</div>";
                     echo '';
                     echo '</div>';
-                    echo '<div class="cart__item__trash" onclick="deleteItem(' . $key . ')">';
-                    echo '<i class="fa-solid fa-trash"></i>';
+                    echo '<div class="cart__item__trash"  onclick="deleteItem(' . $key . ')">';
+                    echo '<i class="fa-solid fa-trash" style = "font-size:22px"></i>';
                     echo '</div>';
                     echo '</div>';
                     $tongtien += ($value*$row['Price']);
@@ -206,6 +222,7 @@ function checkthongtin(){
         }
     }
 }
+
 if(isset($phuongthuc)) {
     if ($phuongthuc == "add") {
         add($productid, $soluong);

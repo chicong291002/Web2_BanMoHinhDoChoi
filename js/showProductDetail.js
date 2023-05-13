@@ -1,8 +1,6 @@
 function showItemDetail(
   name,
   amount,
-  character_name,
-  anime_manga,
   height,
   weight,
   material,
@@ -28,6 +26,34 @@ function showItemDetail(
     maximumFractionDigits: 0,
   });
   console.log(formatted_Price); // Kết quả: "100.000"
+  // nếu khong có dữ liệu sẽ hiển thị NO DATA
+  if(name == ""){
+    name = "NO DATA !!!"
+  }
+  if(amount == ""){
+    amount = "NO DATA !!!"
+  }
+  if(height == ""){
+    height = "NO DATA !!!"
+  }
+  if(weight == ""){
+    weight = "NO DATA !!!"
+  }
+  if(height == ""){
+    height = "NO DATA !!!"
+  }
+  if(weight == ""){
+    weight = "NO DATA !!!"
+  }
+  if(material == ""){
+    material = "NO DATA !!!"
+  }
+  if(product_detail == ""){
+    product_detail = "NO DATA !!!"
+  }
+  if(price == ""){
+    price = "NO DATA !!!"
+  }
 
   let htmls = `
   
@@ -58,7 +84,7 @@ function showItemDetail(
 
                   <div class="card__quantityInput" >
                     <button class="cart__btn__down"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-remove.svg" alt="remove-icon"></button>
-                    <input type="text" class="cart__input__quantity" value="1" id="SL_current">
+                    <input type="number" class="cart__input__quantity" value="1" id="SL_current">
                     <button class="cart__btn__up"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-add.svg" alt="add-icon"></button>
                   </div>
 
@@ -67,39 +93,25 @@ function showItemDetail(
         </div>
           <div class="card__description">
               <div class = "information_product">
-            <h3>Thông tin sản phẩm</h3>
-
+            <h3>THÔNG TIN SẢN PHẨM</h3>
                 <table class = "table_description">
                   <tr>
-                  <td>Nhân vật:</td>
-                  <td>${character_name}</td>
-                  </tr>
-                  <tr>
-                    <td>Anime/Manga:</td>
-                    <td>${anime_manga}</td>
-                  </tr>
-                  <tr>
-                    <td>Chiều cao:</td>
+                    <td class="label_description">Chiều cao:</td>
                     <td>${height}</td>
                   </tr>
-                </table>
-              
-
-              
-                <table class = "table_description">
-                    <tr>
-                      <td>Vật liệu:</td>
+                  <tr>
+                      <td class="label_description">Vật liệu:</td>
                       <td>${material}</td>
                     </tr>
                     <tr>
-                      <td>Khối lượng:</td>
+                      <td class="label_description">Khối lượng:</td>
                       <td>${weight}</td>
                     </tr>
-                  </table>
+                </table>
               </div>
               <div class = "clear"></div>
               <div class = "product__detail-modal information_product">
-                  <h3>Mô tả sản phẩm</h3>
+                  <h3>MÔ TẢ SẢN PHẨM</h3>
                   <p>${product_detail}</p>
               </div>
             </div>
@@ -176,5 +188,24 @@ function showItemDetail(
       "ProductID=" + id + "&SoLuong=" + SL_current.value + "&PhuongThuc=add"
     );
   });
+
+  
+  function checkproduct(id){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "./DAL/XuLy_Cart.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        // Xử lý kết quả trả về từ PHP
+        var response = xhr.responseText;
+        getListCart();
+        getCountCart();
+        if(response == 1){
+          alert("Số lượng còn lại không đủ!");
+        }
+      }
+    };
+    xhr.send("ProductID=" + id + "&SoLuong=" + SL_current.value + "&PhuongThuc=add");
+  }
 }
 

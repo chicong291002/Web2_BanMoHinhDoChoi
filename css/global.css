@@ -441,6 +441,7 @@ header {
 .header__right i {
   margin: 10px;
   font-size: 22px;
+  margin-bottom: 3px;
 }
 
 /* Overplay */
@@ -589,6 +590,7 @@ header {
 }
 
 .header__login {
+  
   /* position: relative; */
   display: flex;
   justify-content: center;
@@ -666,12 +668,46 @@ header {
 }
 
 .btn_header {
-  padding: 5px;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  /* Màu nền của button */
+  border: none;
+  /* Bỏ đường viền */
+  color: white;
+  /* Màu chữ */
+  padding: 5px 5px;
+  text-align: center;
+  /* Căn giữa nội dung của button */
+  text-decoration: none;
+  /* Bỏ gạch chân dưới */
+  display: inline-block;
+  /* Hiển thị button như một khối hộp vuông */
+  font-size: 16px;
+  /* Cỡ chữ */
+  margin: 4px 2px;
+  /* Khoảng cách giữa các button */
+  cursor: pointer;
+  /* Biểu tượng chuột khi rê chuột lên button */
 }
 
-.btn_dangxuat {
-  padding: 5px;
+.btn_header:hover {
+  transition: all 0.5s;
+  background-color: forestgreen;
 }
+
+.btn_header.btn_dangxuat {
+  background-color: red;
+}
+
+.btn_header.btn_dangxuat:hover {
+  transition: all 0.5s;
+  background-color: brown;
+}
+
+
+
+
+
 
 .header__login-menu .header__login-btn-register {
   margin-bottom: 5px;
@@ -690,12 +726,14 @@ header {
 .cart {
   position: relative;
   width: 110px;
+  cursor: pointer;
 }
 
 .img_cart {
   position: relative;
   left: 5px;
   bottom: -10px;
+  font-size: 30px;
 }
 
 .cart__counter {
@@ -934,7 +972,7 @@ header {
 }
 
 .container__row-card-title {
-  font-size: 15px;
+  font-size: 18px;
   text-align: start;
   padding: 7px 10px 0px 10px;
   overflow: hidden;
@@ -1239,7 +1277,7 @@ header {
 }
 
 .cart__item .cart__item__img {
-  width: 120px;
+  width: 160px;
 }
 
 .cart__item_content {
@@ -1251,7 +1289,7 @@ header {
 .cart__item__title {
   width: 160px;
   text-align: center;
-  font-size: 15px;
+  font-size: 20px;
   overflow: hidden;
 }
 
@@ -1291,7 +1329,7 @@ header {
 }
 
 .cart__item__trash {
-  font-size: 18px;
+  font-size: 22px;
   padding: 5px;
 }
 
@@ -1345,10 +1383,309 @@ header {
 
 .cart__total__title {
   font-size: 20px;
+  font-weight: 600;
 }
 
 .cart__total p {
   margin-right: 30px;
+}
+
+.order_tongtien {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* shopbag */
+.shopbag__heading {
+  font-size: 26px;
+  text-align: center;
+  line-height: 1.5;
+  clear: both;
+}
+
+.shopbag__btnClose {
+  font-size: 20px;
+  margin-bottom: 0;
+  padding: 10px;
+  float: right;
+  display: block;
+}
+
+.list__shopbag {
+  width: 70%;
+  position: absolute;
+  margin-bottom: 50px;
+  max-height: 95vh;
+  transform: translateX(-50%);
+  top: 2%;
+  left: 50%;
+  border-radius: 10px;
+  background: #fff;
+  display: none;
+  z-index: 9;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+.list__shopbag.show {
+  display: block;
+}
+
+.shopbag__items {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  display: none;
+  /* background: #fff; */
+  /* border-radius: 10px; */
+}
+
+.shopbag__items.show {
+  display: block;
+}
+
+.shopbag__noItem {
+  text-align: center;
+  font-size: 18px;
+  margin: 10px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 60%;
+  margin: 20px auto;
+}
+
+.shopbag__noItem.disable {
+  display: none;
+}
+
+.shopbag__item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  /* margin: 20px 0; */
+  border: 1px solid #ccc;
+  width: 100%;
+  min-height: 200px;
+  background-color: #fff;
+}
+
+.shopbag__item .shopbag__item__img {
+  width: 160px;
+}
+
+.shopbag__item_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shopbag__item__title {
+  width: 160px;
+  text-align: center;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+.shopbag__item__img {
+  border-radius: 10px;
+}
+
+.shopbag__item__quantity {
+  margin: 0 10px;
+  display: flex;
+}
+
+.shopbag__item__quantity input {
+  width: 30px;
+  font-size: 18px;
+  align-self: center;
+  text-align: center;
+  padding: 2px 0;
+}
+
+.shopbag__item__quantity button {
+  padding: 4px;
+  outline: none;
+  border: 1px solid transparent;
+  background: #ccc;
+  margin: 0 5px;
+}
+
+.shopbag__item__quantity button.disable {
+  cursor: not-allowed;
+}
+
+.shopbag__item__price {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 0, 0, 0.8);
+}
+
+.shopbag__item__trash {
+  font-size: 22px;
+  padding: 5px;
+}
+
+.shopbag__overlay {
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  left: 0%;
+  bottom: 0%;
+  height: inherit;
+  width: initial;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+}
+
+.shopbag__overlay.show {
+  display: block;
+}
+
+.shopbag__footer {
+  width: 100%;
+  border-radius: 0 0 10px 10px;
+}
+
+.shopbag__footer.disable {
+  display: none;
+}
+
+.shopbag__btnOrder {
+  font-size: 16px;
+  background: rgb(255, 66, 78);
+  color: rgb(255, 255, 255);
+  padding: 13px 10px;
+  text-align: center;
+  border-radius: 4px;
+  border: none;
+
+  width: 40%;
+  display: block;
+  cursor: pointer;
+  margin: 15px auto;
+}
+
+.shopbag__total {
+  /* margin: 20px 50px;  */
+  margin: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+}
+
+.shopbag__total__title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.shopbag__total p {
+  margin-right: 30px;
+}
+
+.order_tongtien {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.tb_dondadat {
+  margin-top: 20px;
+}
+
+.xemct_dondadat {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+/* Orderdetail */
+.overplay_OrderDetail {
+  display: none;
+  overflow: auto;
+}
+
+.overplay_OrderDetail.show {
+  display: block;
+}
+
+.overplay__behind_OrderDetail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.form_OrdersDetail {
+  font-family: "Roboto";
+  overflow: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  border: 2px solid cyan;
+  border-radius: 10px;
+  background-color: white;
+  width: 65%;
+  height: 600px;
+  color: black;
+  z-index: 9;
+}
+
+.form_OrderDetail_item {
+  display: flex;
+}
+
+.form_OrderDetail_item div span {
+  color: #1b1b1b;
+}
+
+.input_OrderDetail {
+  flex: 1;
+  color: black;
+  text-align: left;
+  font-size: 25px;
+  /* background-color: black; */
+}
+
+.title_OrderDetail {
+  color: black;
+  font-size: 40px;
+  font-weight: 1000;
+  text-align: center;
+  margin: 15px;
+  border-bottom: 1px solid;
+}
+
+.lableDetail__OrderDetail {
+  color: black;
+  font-size: 25px;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.Detail__OrderDetail {
+  color: black;
+  font-size: 20px;
+}
+
+.btn_X {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: 2px solid red;
+  background-color: red;
+  border-radius: 10px;
+  color: black;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.btn_confirm_DH {
+  display: none;
 }
 
 /* ========Footer ============*/
@@ -1451,7 +1788,7 @@ header {
   max-width: 120px;
   font-size: 14px;
   margin: 5px;
-} 
+}
 
 .toolbar__search-icon {
   font-size: 14px;
@@ -1462,6 +1799,7 @@ header {
   border-color: red;
   border-radius: 3px;
 }
+
 .toolbar__search-icon:hover {
   background-color: black;
   border-color: black;
@@ -1879,7 +2217,7 @@ td {
 
 /* ============== */
 .info__container {
-  width: 60%;
+  width: 50%;
   background: #fff;
   margin: 0 auto;
   display: none;
@@ -2005,8 +2343,8 @@ td {
 }
 
 .info_user {
-  padding-bottom: 10px;
   font-weight: 1000;
+  cursor: pointer;
 }
 
 .info_user:hover {
@@ -2025,7 +2363,7 @@ td {
   left: 314px;
 }
 
-.pagenumber > ul > li {
+.pagenumber>ul>li {
   display: inline-block;
 }
 
@@ -2050,6 +2388,33 @@ td {
   border: 1px solid cyan;
 }
 
+.pagenumber_search_item {
+  float: left;
+  margin: 5px;
+}
+
+.pagination_search {
+  display: flex;
+  justify-content: center;
+}
+
+.pagenumber_search_item_link {
+  text-decoration: none;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 3px;
+  color: white;
+  min-width: 40px;
+  height: 30px;
+  background-color: #1b1b1b;
+  display: block;
+}
+
+.pagenumber_search_item_link:hover {
+  color: cyan;
+  border: 1px solid cyan;
+}
+
 .pagenumber--centered {
   position: relative;
   left: auto;
@@ -2062,8 +2427,9 @@ td {
   width: 972px;
   height: 420px;
 }
+
 .product_content.show {
-  display:block;
+  display: block;
 }
 
 .fa-user {
@@ -2080,3 +2446,21 @@ td {
   width: 250px;
 }
 
+.shopping_bag {
+  margin-right: 20px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.fa-shopping-bag {
+  position: relative;
+  left: 14px;
+  top: 7px;
+}
+
+.labelDetail_TongTien {
+  margin-top: 15px;
+}
+.form_OrderDetail_item{
+  margin-left: 10px;
+}
